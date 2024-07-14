@@ -1,0 +1,25 @@
+<c:FragmentDefinition xmlns:unified="sap.ui.unified"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core">
+    <Dialog title="Upload" contentWidth="30%">
+        <customHeader>
+            <Bar  >
+                <contentLeft>
+                    <Title text="Upload"></Title>
+                </contentLeft>
+                <contentRight>
+                    <Button text="Download" press="onDownloadTemplateButtonPress"></Button>
+                </contentRight>
+            </Bar>
+        </customHeader>
+        <content>
+            <unified:FileUploader id="idFileUploader" change="onFileUploaderChange" fileType="XLSX,xlsx" width="90%" class="sapUiSmallMargin"></unified:FileUploader>
+        </content>
+        <beginButton>
+            <Button text="Upload" press="onUploadButtonPress"></Button>
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press="onCancelButtonPress"></Button>
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>
