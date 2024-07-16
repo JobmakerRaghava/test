@@ -1,0 +1,210 @@
+<mvc:View controllerName="taqasummaryreporttimesheet.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core" displayBlock="true"
+    xmlns:table="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:form="sap.ui.layout.form"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <form:SimpleForm width="auto" class="sapUiResponsiveMargin" layout="ResponsiveGridLayout" editable="true" labelSpanL="3" labelSpanM="3" columnsL="1" columnsM="1" emptySpanL="4" emptySpanM="4" title="">
+                <form:content>
+                    <Label text="Start Date" />
+                    <!-- <DatePicker id="StartDate" valueFormat="yyyy-MM-dd" />
+                    
+
+                        <Label text="End Date" />
+                        <DatePicker id="EndDate" valueFormat="yyyy-MM-dd" /> -->
+
+                    <DatePicker id="StartDate" afterValueHelpClose="onDate" value="{
+						'type': 'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy-MM-dd'
+						}
+					    }"
+                        valueFormat="yyyy-MM-dd" />
+
+
+                    <Label text="End Date" />
+                    <DatePicker id="EndDate" afterValueHelpClose="onDate" value="{
+						'type': 'sap.ui.model.type.Date',
+						'formatOptions': {
+							'pattern': 'yyyy-MM-dd'
+						}
+					    }"
+                         valueFormat="yyyy-MM-dd" />
+
+                    <!-- <Button icon="sap-icon://excel-attachment" press="onExport"/> -->
+
+                    <Button text="Search" press="._onSummaryPress" type="Emphasized" />
+                </form:content>
+            </form:SimpleForm>
+            <IconTabBar id="idIconTabBarNoIcons" expanded="{device>/isNoPhone}" class="sapUiResponsiveContentPadding">
+                <items>
+                    <IconTabFilter text="Summary Report" key="info">
+                        <!-- <Button text="Summary Data" press="onSummaryPress"/> -->
+                        <l:VerticalLayout class="sapUiContentPadding" width="100%">
+                            <MultiComboBox selectionChange="handleSelectionChange" showSelectAll="true" selectionFinish="handleSelectionFinish" width="350px" items="{
+                                path: 'oAllowancesModel>/'
+                            }">
+                                <core:Item key="{oAllowancesModel>Value}" text="{oAllowancesModel>Value}"/>
+                            </MultiComboBox>
+                        </l:VerticalLayout>
+                        <table:Table id="SummaryTable" fixedColumnCount="6">
+                            <table:extension>
+                                <OverflowToolbar >
+                                    <ToolbarSpacer ></ToolbarSpacer>
+                                    <Button text="Export" icon="sap-icon://excel-attachment" press=".onExportPress" type="Emphasized" />
+                                </OverflowToolbar>
+                            </table:extension>
+                        </table:Table>
+                        <!-- <Button text="Export" press=".onExportPress" type="Emphasized" /> -->
+                    </IconTabFilter>
+                    <IconTabFilter text="Detailed Report" key="attachments">
+
+
+                        <table:Table id="table" rows="{path: 'AdminStatusList>/'}" fixedColumnCount="6">
+                            <table:columns>
+                                <table:Column width="7em" sortProperty="AdminStatusList>EmployeeID">
+                                    <Label text="Employee ID" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>EmployeeID}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em" sortProperty="AdminStatusList>EmployeeName">
+                                    <Label text="Employee Name" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>EmployeeName}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em" sortProperty="AdminStatusList>Date">
+                                    <Label text="Date" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>Date}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em" sortProperty="AdminStatusList>WbsCode">
+                                    <Label text="WBS/CC" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>WbsCode}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em" sortProperty="AdminStatusList>WorkType">
+                                    <Label text="Working Type" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>WorkType}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Total Hours" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>TotalHours}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Overtime" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>OvertimeHours}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Job Bonus" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>JobBonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Critical Bonus" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>CriticalBonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Job Bonus %" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>JobBonusPer}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Meal Allowance" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>MealAllowance}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Travel Bonus" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>TravelBonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Trip Bonus" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>TripBonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Tier1" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>Tier1Bonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Tier2" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>Tier2Bonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Tier3" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>Tier3Bonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="ZERO NPT Bonus" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>ZERONPTBonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="FTA Bonus" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>FTABonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                                <table:Column width="7em">
+                                    <Label text="Leave Accrual" />
+                                    <table:template>
+                                        <Text text="{AdminStatusList>FTABonus}" wrapping="false" />
+                                    </table:template>
+                                </table:Column>
+                            </table:columns>
+                            <!-- <ColumnListItem>
+                        <Text text="{AdminStatusList>EmployeeID}" />
+                        <Text text="{AdminStatusList>EmployeeName}" />
+                        <Text text="{AdminStatusList>Date}" />
+                        <Text text="{AdminStatusList>WbsCode}" />
+                        <Text text="{AdminStatusList>WorkType}" />
+                        <Text text="{AdminStatusList>TotalHours}" />
+                        <Text text="{AdminStatusList>OvertimeHours}" />
+                        <Text text="{AdminStatusList>JobBonus}" />
+                        <Text text="{AdminStatusList>CriticalBonus}" />
+                        <Text text="{AdminStatusList>JobBonusPer}" />
+                        <Text text="{AdminStatusList>MealAllowance}" />
+                        <Text text="{AdminStatusList>TravelBonus}" />
+                        <Text text="{AdminStatusList>TripBonus}" />
+                        <Text text="{AdminStatusList>Tier1Bonus}" />
+                        <Text text="{AdminStatusList>Tier2Bonus}" />
+                        <Text text="{AdminStatusList>Tier3Bonus}" />
+                        <Text text="{AdminStatusList>ZERONPTBonus}" />
+                        <Text text="{AdminStatusList>FTABonus}" />
+                    </ColumnListItem> -->
+                        </table:Table>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+
+        </content>
+    </Page>
+</mvc:View>
