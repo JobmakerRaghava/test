@@ -9,7 +9,7 @@ sap.ui.define([
 ],
     function (Controller, BusyIndicator, JSONModel, xlsx, MessageBox, Filter, FilterOperator) {
         "use strict";
-        var aAllowances = [
+        const aAllowances = [
             {
                 "Value": "Job Bonus",
                 "Key": ""
@@ -208,7 +208,7 @@ sap.ui.define([
                                     "JobTitle": oColumns.JobTitle
                                 };
 
-                                for (let d = StartDateObject; d <= EndDateObject; d.setDate(d.getDate() + 1)) {
+                                for (let d = new Date(StartDateObject); d <= EndDateObject; d.setDate(d.getDate() + 1)) {
                                     // var oDatee = d.toLocaleDateString().split("/").reverse().join("-");
                                     let oDatee = that._convert_Date(d);
                                     objj[oDatee] = "";
